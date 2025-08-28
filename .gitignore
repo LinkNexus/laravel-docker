@@ -1,0 +1,8 @@
+/**
+!.gitignore
+!frankenphp/**
+!compose.override.yaml
+!compose.yaml
+!compose.prod.yaml
+!Dockerfile
+!LICENSE
