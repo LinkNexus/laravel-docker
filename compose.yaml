@@ -37,3 +37,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  database_data:
