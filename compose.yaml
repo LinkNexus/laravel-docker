@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      DB_CONNECTION: postgresql
+      DB_CONNECTION: pgsql
       DB_HOST: database
       DB_PORT: 5432
       DB_DATABASE: app
