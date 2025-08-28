@@ -40,8 +40,6 @@ CMD ["php", "artisan", "octane:frankenphp"]
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
-ENV APP_ENV=local
-ENV APP_DEBUG=true
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
