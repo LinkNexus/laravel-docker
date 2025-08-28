@@ -11,7 +11,6 @@ services:
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
     environment:
-      SITE_NAME: blitz-task.orb.local
       MAILER_DSN: smtp://mailer:1025
       FRANKENPHP_WORKER_CONFIG: watch
       MERCURE_EXTRA_DIRECTIVES: demo

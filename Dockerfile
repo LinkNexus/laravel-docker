@@ -40,7 +40,8 @@ CMD ["php", "artisan", "octane:frankenphp"]
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
-ENV APP_ENV=dev
+ENV APP_ENV=local
+ENV APP_DEBUG=true
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
@@ -58,7 +59,8 @@ CMD ["php", "artisan", "octane:frankenphp", "--watch"]
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod
 
-ENV APP_ENV=prod
+ENV APP_ENV=production
+ENV APP_DEBUG=false
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 

@@ -1,0 +1,12 @@
+# Production environment override
+services:
+  app:
+    build:
+      context: .
+      target: frankenphp_prod
+    environment:
+      APP_SECRET: ${APP_SECRET}
+  
+  database:
+    volumes:
+      - ./docker/db/data:/var/lib/postgresql/data:rw
