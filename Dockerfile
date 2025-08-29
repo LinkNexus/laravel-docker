@@ -93,6 +93,4 @@ RUN rm -Rf frankenphp/
 RUN set -eux; \
     chmod +x artisan; \
     php artisan key:generate --ansi; \
-    rm -f bootstrap/cache/packages.php bootstrap/cache/services.php; \
     composer dump-autoload --classmap-authoritative --no-dev --no-scripts; \
-    composer dump-env prod; \
