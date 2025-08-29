@@ -42,6 +42,7 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 		npm install
 		echo "Starting the development server..."
 		npm run dev -- --host &
+	fi
 
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
