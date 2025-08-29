@@ -95,4 +95,3 @@ RUN set -eux; \
     php artisan key:generate --ansi; \
     composer dump-autoload --classmap-authoritative --no-dev; \
     composer dump-env prod; \
-    sync
