@@ -30,23 +30,18 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	# Or about an error in project initialization
 	php artisan
 
-	if grep -q ^DATABASE_URL= .env; then
-		if [ "$( find ./migrations -iname '*.php' -print -quit )" ]; then
+	if [ "$( find ./database/migrations -iname '*.php' -print -quit )" ]; then
+		if [ "$APP_ENV" != "production" ]; then
 			php artisan migrate:fresh --seed --no-interaction
+		else
+			php artisan migrate --no-interaction
 		fi
 	fi
 
-	# if [ -f package.json ]; then
-    #     if [ "$NODE_ENV" = "production" ]; then
-    #     	npm install --omit=dev
-    #      	echo "Building assets for production..."
-    #      	npm run build
-    #     else
-    #     	npm install
-    #      	echo "Starting development server..."
-    # 	 	npm run dev -- --host &
-    #     fi
-    # fi
+	if [ -f package.json ] && [ "$NODE_ENV" = "development" ]; then
+		npm install
+		echo "Starting the development server..."
+		npm run dev -- --host &
 
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache

@@ -16,6 +16,7 @@ services:
       MAIL_PORT: 1025
       MAIL_USERNAME: null
       MAIL_PASSWORD: null
+      NODE_ENV: ${NODE_ENV:-development}
       FRANKENPHP_WORKER_CONFIG: watch
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
@@ -25,16 +26,11 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
-  ###> symfony/mercure-bundle ###
-  ###< symfony/mercure-bundle ###
   
-  ###> doctrine/doctrine-bundle ###
   database:
     ports:
       - "5432"
-  ###< doctrine/doctrine-bundle ###
   
-  ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
     ports:
@@ -43,9 +39,6 @@ services:
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
-    networks:
-      - default
-  ###< symfony/mailer ###
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -55,8 +48,6 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - default
 
 volumes:
   pgadmin_data:

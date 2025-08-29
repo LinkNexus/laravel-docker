@@ -5,7 +5,9 @@ services:
       context: .
       target: frankenphp_prod
     environment:
-      APP_SECRET: ${APP_SECRET}
+      NODE_ENV: production
+      APP_ENV: production
+      APP_DEBUG: false
   
   database:
     volumes:
