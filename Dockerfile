@@ -35,6 +35,8 @@ ENTRYPOINT ["docker-entrypoint"]
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD ["php", "artisan", "octane:frankenphp"]
 
+
+
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
@@ -55,8 +57,10 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
 CMD ["php", "artisan", "octane:frankenphp", "--watch"]
 
+
+
 # Node build stage
-FROM node:lts-alpine as node_build 
+FROM node:lts-alpine AS node_build 
 
 WORKDIR /app
 
@@ -65,7 +69,8 @@ RUN npm ci
 
 COPY --link . .
 
-RUN npm run build
+CMD ["npm", "run", "build"]
+
 
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod

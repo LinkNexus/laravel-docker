@@ -5,8 +5,9 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	# Install the project the first time PHP is started
 	# After the installation, the following block can be deleted
 	if [ ! -f composer.json ]; then
+		composer global require laravel/installer
 		rm -Rf tmp/
-		composer create-project laravel/laravel tmp --prefer-dist
+		laravel new tmp
 
 		cd tmp
 		cp -Rp . ..
@@ -25,8 +26,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	if [ -z "$(ls -A 'vendor/' 2>/dev/null)" ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
-
-	echo 'Hello World!'
 
 	# Display information about the current project
 	# Or about an error in project initialization
