@@ -32,14 +32,11 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	# Or about an error in project initialization
 	php artisan
 
-
 	if [ "$( find ./database/migrations -iname '*.php' -print -quit )" ]; then
 		if [ "$APP_ENV" != "production" ]; then
 			php artisan migrate:fresh --seed --no-interaction
 		else
-	echo "Hey"
-			php artisan migrate --no-interaction
-			echo "Ho"
+			php artisan migrate --force --no-interaction
 		fi
 	fi
 
@@ -48,9 +45,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 		echo "Starting the development server..."
 		npm run dev -- --host &
 	fi
-
-	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
-	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
 
 	echo 'PHP app ready!'
 fi
