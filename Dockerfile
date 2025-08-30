@@ -49,8 +49,7 @@ RUN set -eux; \
     ;
 
 # Installing Nodejs and NPM
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | sh
-RUN apt-get install -y nodejs
+RUN apk add nodejs npm
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
