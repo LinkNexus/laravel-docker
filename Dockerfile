@@ -65,7 +65,7 @@ FROM node:lts-alpine AS node_build
 WORKDIR /app
 
 COPY --link package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --prefer-offline --no-audit --progress=false --loglevel=error --omit=dev
 
 COPY --link . .
 
