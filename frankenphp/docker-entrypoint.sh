@@ -32,13 +32,14 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	# Or about an error in project initialization
 	php artisan
 
-	echo "Hey"
 
 	if [ "$( find ./database/migrations -iname '*.php' -print -quit )" ]; then
 		if [ "$APP_ENV" != "production" ]; then
 			php artisan migrate:fresh --seed --no-interaction
 		else
+	echo "Hey"
 			php artisan migrate --no-interaction
+			echo "Ho"
 		fi
 	fi
 
