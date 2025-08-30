@@ -81,7 +81,7 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* ./
 RUN set -eux; \
-    composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
+    composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-progress
 
 # copy sources
 COPY --link . ./
@@ -91,6 +91,5 @@ RUN rm -Rf frankenphp/
 RUN set -eux; \
     chmod +x artisan; \
     php artisan key:generate --ansi; \
-    php artisan config:clear; \
-    php artisan cache:clear; \
-    composer dump-autoload --classmap-authoritative --no-dev --no-scripts; \
+    php artisan optimize \
+    composer dump-autoload --classmap-authoritative --no-dev; \
