@@ -4,8 +4,6 @@ FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 
-VOLUME /app/bootstrap/cache
-
 RUN apk add --no-cache \
     acl \
     file \
@@ -93,4 +91,6 @@ RUN rm -Rf frankenphp/
 RUN set -eux; \
     chmod +x artisan; \
     php artisan key:generate --ansi; \
+    php artisan config:clear; \
+    php artisan cache:clear; \
     composer dump-autoload --classmap-authoritative --no-dev --no-scripts; \

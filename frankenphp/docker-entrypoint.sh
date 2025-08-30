@@ -26,6 +26,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
 
+	echo 'Hello World!'
+
 	# Display information about the current project
 	# Or about an error in project initialization
 	php artisan
