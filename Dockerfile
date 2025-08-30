@@ -91,5 +91,5 @@ RUN rm -Rf frankenphp/
 RUN set -eux; \
     chmod +x artisan; \
     php artisan key:generate --ansi; \
-    php artisan optimize \
+    php artisan optimize; \
     composer dump-autoload --classmap-authoritative --no-dev; \
