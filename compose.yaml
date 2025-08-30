@@ -14,6 +14,8 @@ services:
     volumes:
       - caddy_data:/data 
       - caddy_config:/config
+    depends_on:
+      - database
 
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
