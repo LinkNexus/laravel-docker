@@ -86,14 +86,14 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 COPY --link . ./
 RUN set -eux; \
     chmod +x artisan; \
-    composer install --no-cache --prefer-dist --no-dev --no-progress; \
-    composer req laragear/preload
+    composer install --no-cache --prefer-dist --no-dev --no-progress; 
+# composer req laragear/preload
 
 COPY --from=node_build --link /app/public/build ./public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-    composer dump-autoload --classmap-authoritative --no-dev --no-scripts; \
+    composer dump-autoload --classmap-authoritative --no-dev; \
     [ -f .env ] || cp .env.example .env; \
     php artisan key:generate --ansi; \
     php artisan optimize; \
