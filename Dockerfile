@@ -27,6 +27,8 @@ ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
+ENV PATH="/root/.composer/vendor/bin:${PATH}"
+
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
@@ -84,7 +86,8 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 COPY --link . ./
 RUN set -eux; \
     chmod +x artisan; \
-    composer install --no-cache --prefer-dist --no-dev --no-progress
+    composer install --no-cache --prefer-dist --no-dev --no-progress; \
+    composer req laragear/preload
 
 COPY --from=node_build --link /app/public/build ./public/build
 RUN rm -Rf frankenphp/
