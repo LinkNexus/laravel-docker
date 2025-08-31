@@ -26,6 +26,7 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
+    stdin_open: true
   
   database:
     ports:
