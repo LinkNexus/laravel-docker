@@ -91,8 +91,8 @@ RUN rm -Rf frankenphp/
 
 RUN set -eux; \
     composer dump-autoload --classmap-authoritative --no-dev; \
+    [ -f .env ] || cp .env.example .env; \
     php artisan key:generate --ansi; \
-    cp .env.example .env || true; \
     php artisan optimize; \
     php artisan config:cache; \
     php artisan event:cache; \
