@@ -81,18 +81,15 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 
-# prevent the reinstallation of vendors at every changes in the source code
-COPY --link composer.* ./
-RUN set -eux; \
-    composer install --no-cache --prefer-dist --no-autoloader --no-dev --no-progress
-
-# copy sources
 COPY --link . ./
+RUN set -eux; \
+    chmod +x artisan; \
+    composer install --no-cache --prefer-dist --no-dev --no-progress
+
 COPY --from=node_build --link /app/public/build ./public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-    chmod +x artisan; \
     composer dump-autoload --classmap-authoritative --no-dev; \
     php artisan preload:stub; \
     mv preload.php config/preload.php; \
