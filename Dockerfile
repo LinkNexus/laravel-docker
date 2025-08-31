@@ -84,7 +84,7 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* ./
 RUN set -eux; \
-    composer require laragear/preload; \
+    composer require laragear/preload --no-autoloader; \
     composer install --no-cache --prefer-dist --no-autoloader --no-dev --no-progress
 
 # copy sources
