@@ -86,8 +86,8 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 COPY --link . ./
 RUN set -eux; \
     chmod +x artisan; \
-    composer install --no-cache --prefer-dist --no-dev --no-progress; 
-# composer req laragear/preload
+    composer req laragear/preload; \
+    composer install --no-cache --prefer-dist --no-dev --no-progress;
 
 COPY --from=node_build --link /app/public/build ./public/build
 RUN rm -Rf frankenphp/
