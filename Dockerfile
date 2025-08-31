@@ -96,3 +96,4 @@ RUN set -eux; \
     composer dump-autoload --classmap-authoritative --no-dev; \
     php artisan key:generate --ansi; \
     php artisan optimize; \
+    php artisan config:cache; \
