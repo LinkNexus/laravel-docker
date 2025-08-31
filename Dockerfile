@@ -91,12 +91,12 @@ RUN rm -Rf frankenphp/
 
 RUN set -eux; \
     composer dump-autoload --classmap-authoritative --no-dev; \
-    php artisan preload:stub; \
-    mv preload.php config/preload.php; \
     php artisan key:generate --ansi; \
     cp .env.example .env || true; \
     php artisan optimize; \
     php artisan config:cache; \
     php artisan event:cache; \
     php artisan route:cache; \
-    php artisan view:cache;
+    php artisan view:cache; \
+    php artisan preload:stub; \
+    mv preload.php config/
