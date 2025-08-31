@@ -90,7 +90,7 @@ RUN set -eux; \
     composer install --no-cache --prefer-dist --no-dev --no-progress;
 
 # copy sources
-COPY --link . ./
+# COPY --link . ./
 COPY --from=node_build --link /app/public/build ./public/build
 RUN rm -Rf frankenphp/
 
