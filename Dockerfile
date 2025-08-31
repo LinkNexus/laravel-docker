@@ -93,8 +93,8 @@ RUN rm -Rf frankenphp/
 
 RUN set -eux; \
     chmod +x artisan; \
-    php artisan preload:stub; \
     composer dump-autoload --classmap-authoritative --no-dev; \
+    php artisan preload:stub; \
     php artisan key:generate --ansi; \
     cp .env.example .env || true; \
     php artisan optimize; \
