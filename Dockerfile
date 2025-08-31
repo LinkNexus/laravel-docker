@@ -36,7 +36,6 @@ HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit
 CMD ["php", "artisan", "octane:frankenphp"]
 
 
-
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
@@ -55,7 +54,7 @@ RUN apk add nodejs npm
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
-CMD ["php", "artisan", "octane:frankenphp", "--watch"]
+CMD ["frankenphp", "php-server", "--worker", "/app/public/index.php", "--watch='/app/**/*.php'"]
 
 
 
@@ -85,7 +84,7 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* ./
 RUN set -eux; \
-    composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-progress
+    composer install --no-cache --prefer-dist --no-dev --no-progress
 
 # copy sources
 COPY --link . ./
