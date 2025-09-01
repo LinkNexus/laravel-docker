@@ -19,10 +19,19 @@ help: ## Outputs this help screen
 
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
+	@$(DOCKER_COMP) -f compose.yaml -f compose.override.yaml build --pull --no-cache
+
+build-prod: ## Builds the Docker images for production
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml build --pull --no-cache
+
+run-app: ## Run the Docker containers
+	@$(DOCKER_COMP) -f compose.yaml -f compose.override.yaml run app
 
 up: ## Start the Docker containers in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+	@$(DOCKER_COMP) -f compose.yaml -f compose.override.yaml up --detach
+
+up-prod: ## Start the Docker containers in detached mode for production (no logs)
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --detach
 
 start: build up ## Build and start the containers
 
