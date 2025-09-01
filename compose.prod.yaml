@@ -4,6 +4,13 @@ services:
     build:
       context: .
       target: frankenphp_prod
+      args:
+        DB_CONNECTION: pgsql
+        DB_HOST: database
+        DB_PORT: 5432
+        DB_DATABASE: app
+        DB_USERNAME: app
+        DB_PASSWORD: ${POSTGRES_PASSWORD}
     environment:
       NODE_ENV: production
       APP_ENV: production
