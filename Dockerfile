@@ -71,7 +71,7 @@ RUN npm ci --omit=dev
 
 COPY --link . .
 
-CMD ["npm", "run", "build"]
+RUN npm run build
 
 
 # Prod FrankenPHP image
@@ -92,7 +92,7 @@ RUN set -eux; \
 
 RUN rm -rf public/build/
 RUN rm -f public/hot
-COPY --from=node_build --link /app/public/build /app/public/
+COPY --from=node_build --link /app/public/build /app/public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
