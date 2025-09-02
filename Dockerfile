@@ -97,6 +97,4 @@ RUN rm -Rf frankenphp/
 RUN set -eux; \
     composer dump-autoload --classmap-authoritative --no-dev; \
     [ -f .env ] || cp .env.example .env; \
-    php artisan key:generate --ansi; \
-    php artisan preload:stub; \
-    mv preload.php config/
+    php artisan key:generate --ansi; 

@@ -33,6 +33,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 
 	if [ "$APP_ENV" = "production" ]; then 
 		php artisan optimize
+    	php artisan preload:stub
+    	mv preload.php config
 	fi
 
 	if [ "$( find ./database/migrations -iname '*.php' -print -quit )" ]; then
