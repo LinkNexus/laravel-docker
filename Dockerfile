@@ -97,10 +97,6 @@ RUN set -eux; \
     composer dump-autoload --classmap-authoritative --no-dev; \
     [ -f .env ] || cp .env.example .env; \
     php artisan key:generate --ansi; \
-    php artisan optimize; \
-    # php artisan config:cache; \
-    php artisan event:cache; \
-    php artisan route:cache; \
-    php artisan view:cache; \
+    # php artisan optimize; \
     php artisan preload:stub; \
     mv preload.php config/
