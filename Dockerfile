@@ -64,10 +64,9 @@ CMD ["php", "artisan", "octane:frankenphp", "--watch"]
 FROM node:lts-alpine AS node_build 
 
 WORKDIR /app
-ENV NODE_ENV=production
 
 COPY --link package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --include=dev
 
 COPY --link . .
 
