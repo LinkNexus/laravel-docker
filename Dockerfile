@@ -92,7 +92,7 @@ RUN set -eux; \
 
 RUN rm -rf public/build/
 RUN rm -f public/hot
-COPY --from=node_build --link /app/public/build /app/public/build
+COPY --from=node_build --link /app/public/build /app/public/
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
