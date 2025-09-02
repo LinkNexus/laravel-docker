@@ -4,3 +4,4 @@ compose.yaml
 compose.override.yaml
 compose.prod.yaml
 LICENSE
+README.md
