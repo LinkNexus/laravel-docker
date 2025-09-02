@@ -67,11 +67,11 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY --link package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY --link . .
 
-RUN npx vite build
+RUN npm run build
 
 
 # Prod FrankenPHP image
