@@ -67,7 +67,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY --link package.json package-lock.json ./
-RUN npm ci --prefer-offline --no-audit --progress=false --loglevel=error --omit=dev
+RUN npm ci --omit=dev
 
 COPY --link . .
 
