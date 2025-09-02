@@ -71,7 +71,7 @@ RUN npm ci --omit=dev
 
 COPY --link . .
 
-RUN npm run build
+RUN npx vite build
 
 
 # Prod FrankenPHP image
