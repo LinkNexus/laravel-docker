@@ -98,7 +98,7 @@ RUN set -eux; \
     [ -f .env ] || cp .env.example .env; \
     php artisan key:generate --ansi; \
     php artisan optimize; \
-    php artisan config:cache; \
+    # php artisan config:cache; \
     php artisan event:cache; \
     php artisan route:cache; \
     php artisan view:cache; \
