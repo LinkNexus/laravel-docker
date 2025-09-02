@@ -90,8 +90,9 @@ RUN set -eux; \
     composer req laragear/preload; \
     composer install --no-cache --prefer-dist --no-dev --no-progress;
 
-COPY --from=node_build --link /app/public/build ./public/build
+RUN rm -rf public/build/
 RUN rm -f public/hot
+COPY --from=node_build --link /app/public/build /app/public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
