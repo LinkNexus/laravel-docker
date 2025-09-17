@@ -9,3 +9,7 @@
 !.dockerignore
 !Makefile
 !README.md
+!.php-cs.xml
+!.bladeformatter.json
+!.editorconfig
+!pint.json

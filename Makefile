@@ -11,7 +11,7 @@ ARTISAN  = $(PHP) artisan
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test
+.PHONY        : help build up start down logs sh composer vendor artisan cc test
 
 ## —— 🎵 🐳 The Laravel Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
