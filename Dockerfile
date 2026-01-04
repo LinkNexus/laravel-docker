@@ -44,7 +44,7 @@ ARG BUILD_CONFIGURATION=Release
 RUN git clone https://github.com/LinkNexus/Nightmare.git .
 RUN dotnet restore "./Nightmare/Nightmare.csproj"
 WORKDIR /app/Nightmare
-RUN dotnet publish "./Nightmare.csproj" -c $BUILD_CONFIGURATION -o /app/out -r linux-x64 -p:PublishAot=true -p:SelfContained=true -p:StripSymbols=true -p:InvariantGlobalization=true --no-restore
+RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/out -r linux-x64 -p:PublishAot=true -p:SelfContained=true -p:StripSymbols=true -p:InvariantGlobalization=true --no-restore
 
 
 # Dev FrankenPHP image
