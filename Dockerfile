@@ -42,13 +42,12 @@ WORKDIR /app
 ARG BUILD_CONFIGURATION=Release
 
 RUN apt-get update && apt-get install -y \
-  clang \
-  lld \
-  gcc \
-  libc6-dev \
-  libstdc++-dev \
-  zlib1g-dev \
-  && rm -rf /var/lib/apt/lists/*
+    clang \
+    lld \
+    libc6-dev \
+    libstdc++-14-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/LinkNexus/Nightmare.git .
 WORKDIR /app/Nightmare
@@ -119,4 +118,4 @@ COPY --from=node_build --link /app/public/build /app/public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-  composer dump-autoload --classmap-authoritative --no-dev; 
+  composer dump-autoload --classmap-authoritative --no-dev;
