@@ -41,6 +41,16 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS dotnet_build
 USER $APP_UID
 WORKDIR /app
 ARG BUILD_CONFIGURATION=Release
+
+RUN apt-get update && apt-get install -y \
+  clang \
+  lld \
+  gcc \
+  libc6-dev \
+  libstdc++-dev \
+  zlib1g-dev \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN git clone https://github.com/LinkNexus/Nightmare.git .
 WORKDIR /app/Nightmare
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/out -r linux-x64 -p:PublishAot=true -p:SelfContained=true -p:StripSymbols=true -p:InvariantGlobalization=true
