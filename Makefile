@@ -24,7 +24,7 @@ build: ## Builds the Docker images
 build-prod: ## Builds the Docker images for production
 	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 
-run-app: ## Run the Docker containers
+run-app: ## Run the Docker containers, should be used just once to initialize the application
 	@$(DOCKER_COMP) -f compose.yaml -f compose.override.yaml run app
 
 up: ## Start the Docker containers in detached mode (no logs)

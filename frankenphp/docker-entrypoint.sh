@@ -29,7 +29,13 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 
 	# Display information about the current project
 	# Or about an error in project initialization
-	php artisan
+	php artisan  
+	
+	if [ ! -f .env ]; then
+		cp .env.example .env
+    	php artisan key:generate --ansi
+  	fi
+
 
 	if [ "$APP_ENV" = "production" ]; then 
 		php artisan optimize

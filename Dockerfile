@@ -5,23 +5,23 @@ FROM frankenphp_upstream AS frankenphp_base
 WORKDIR /app
 
 RUN apk add --no-cache \
-    acl \
-    file \
-    gettext \
-    git \
-    supervisor \
-    make
+  acl \
+  file \
+  gettext \
+  git \
+  supervisor \
+  make
 
 RUN set -eux; \
-    install-php-extensions \
-    @composer \
-    apcu \
-    intl \
-    opcache \
-    zip \
-    pdo_pgsql \
-    pcntl \
-    ;
+  install-php-extensions \
+  @composer \
+  apcu \
+  intl \
+  opcache \
+  zip \
+  pdo_pgsql \
+  pcntl \
+  ;
 
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
@@ -47,9 +47,9 @@ ENV FRANKENPHP_WORKER_CONFIG=watch
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN set -eux; \
-    install-php-extensions \
-    xdebug \
-    ;
+  install-php-extensions \
+  xdebug \
+  ;
 
 # Installing Nodejs and NPM
 RUN apk add nodejs npm
@@ -61,7 +61,7 @@ CMD ["php", "artisan", "octane:frankenphp", "--watch"]
 
 
 # Node build stage
-FROM node:lts-alpine AS node_build 
+FROM node:lts-alpine AS node_build
 
 WORKDIR /app
 
@@ -85,9 +85,9 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 
 COPY --link . ./
 RUN set -eux; \
-    chmod +x artisan; \
-    composer req laragear/preload; \
-    composer install --no-cache --prefer-dist --no-dev --no-progress;
+  chmod +x artisan; \
+  composer req laragear/preload; \
+  composer install --no-cache --prefer-dist --no-dev --no-progress;
 
 RUN rm -rf public/build/
 RUN rm -f public/hot
@@ -95,6 +95,4 @@ COPY --from=node_build --link /app/public/build /app/public/build
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-    composer dump-autoload --classmap-authoritative --no-dev; \
-    [ -f .env ] || cp .env.example .env; \
-    php artisan key:generate --ansi; 
+  composer dump-autoload --classmap-authoritative --no-dev; 
