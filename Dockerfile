@@ -37,6 +37,15 @@ ENTRYPOINT ["docker-entrypoint"]
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD ["php", "artisan", "octane:frankenphp"]
 
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS dotnet_build
+USER $APP_UID
+WORKDIR /app
+ARG BUILD_CONFIGURATION=Release
+RUN git clone https://github.com/LinkNexus/Nightmare.git .
+RUN dotnet restore "./Nightmare/Nightmare.csproj"
+WORKDIR /app/Nightmare
+RUN dotnet publish "./Nightmare.csproj" -c $BUILD_CONFIGURATION -o /app/out -r linux-x64 -p:PublishAot=true -p:SelfContained=true -p:StripSymbols=true -p:InvariantGlobalization=true --no-restore
+
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
@@ -53,6 +62,13 @@ RUN set -eux; \
 
 # Installing Nodejs and NPM
 RUN apk add nodejs npm
+
+# Installing Nightmare for endpoints testing
+COPY --from=dotnet_build --link /app/out/nightmare /usr/local/bin/nightmare
+RUN set -eux; \
+  chmod +x /usr/local/bin/nightmare; \
+  apk add --no-cache libc6-compat; \
+  nightmare --help;
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 

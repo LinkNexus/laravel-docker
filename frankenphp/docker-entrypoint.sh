@@ -31,16 +31,15 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ]; then
 	# Or about an error in project initialization
 	php artisan  
 	
-	if [ ! -f .env ]; then
-		cp .env.example .env
-    	php artisan key:generate --ansi
+  	if [ ! -f .env ]; then
+   		cp .env.example .env
   	fi
 
+  	php artisan key:generate --ansi
 
 	if [ "$APP_ENV" = "production" ]; then 
 		php artisan optimize
     	php artisan preload:stub
-    	mv preload.php config
 	fi
 
 	if [ "$( find ./database/migrations -iname '*.php' -print -quit )" ]; then
