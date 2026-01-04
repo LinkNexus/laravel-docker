@@ -38,7 +38,6 @@ HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit
 CMD ["php", "artisan", "octane:frankenphp"]
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS dotnet_build
-USER $APP_UID
 WORKDIR /app
 ARG BUILD_CONFIGURATION=Release
 
